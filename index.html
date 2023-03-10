@@ -5,23 +5,15 @@
   </body>
   <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-  <script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
     const root = document.querySelector("#root");
-    const h3 = React.createElement(
-      "h3",
-      {
-        onMouseEnter: () => console.log("mouse enter"),
-      },
-      "span"
+    const title = (
+      <h3 onMouseEnter={() => console.log("Mouse Enter!!")}>Title</h3>
     );
-    const btn = React.createElement(
-      "button",
-      {
-        onClick: () => console.log("Click"),
-      },
-      "click"
-    );
-    const container = React.createElement("div", null, [h3, btn]);
+    const btn = <button onClick={() => console.log("Click")}>Click</button>;
+
+    const container = React.createElement("div", null, [title, btn]);
     ReactDOM.render(container, root);
   </script>
 </html>
