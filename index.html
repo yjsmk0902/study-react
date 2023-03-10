@@ -8,12 +8,20 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.querySelector("#root");
-    const title = (
+
+    const Title = () => (
       <h3 onMouseEnter={() => console.log("Mouse Enter!!")}>Title</h3>
     );
-    const btn = <button onClick={() => console.log("Click")}>Click</button>;
+    const Button = () => (
+      <button onClick={() => console.log("Click")}>Click</button>
+    );
 
-    const container = React.createElement("div", null, [title, btn]);
-    ReactDOM.render(container, root);
+    const Container = () => (
+      <div>
+        <Title />
+        <Button />
+      </div>
+    );
+    ReactDOM.render(<Container />, root);
   </script>
 </html>
