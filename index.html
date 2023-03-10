@@ -9,15 +9,38 @@
   <script type="text/babel">
     const root = document.querySelector("#root");
     function App() {
-      const [counter, setCounter] = React.useState(0);
-      const onClick = () => {
-        // setCounter(counter + 1);           //이것보다
-        setCounter((current) => current + 1); //상대적으로 안전함
+      const [minutes, setMinutes] = React.useState();
+      const [hours, setHours] = React.useState();
+      const [flipped, setFlipped] = React.useState(false);
+      const onChange = (event) => {
       };
+      const reset = () => setMinutes(0);
+
+      const flip = () => setFlipped((current) => !current);
+
       return (
         <div>
-          <h3>전체 클릭 수: {counter}</h3>
-          <button onClick={onClick}>Click</button>
+          <h1>Converter</h1>
+          <label htmlFor="minutes">Minutes</label>
+          <input
+            value={minutes}
+            id="minutes"
+            placeholder="몇 분?"
+            type="number"
+            onChange={onChange}
+            disabled={flipped === true}
+          />
+          <label htmlFor="hours">Hours</label>
+          <input
+            value={Math.round(minutes / 60)}
+            id="hours"
+            placeholder="몇 시간?"
+            type="number"
+            onChange={onChange}
+            disabled={!flipped === false}
+          />
+          <button onClick={reset}>Reset</button>
+          <button onClick={flip}>Filp</button>
         </div>
       );
     }
