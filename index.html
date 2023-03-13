@@ -7,8 +7,7 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    const root = document.querySelector("#root");
-    function App() {
+    function TimeConverter() {
       const [amount, setAmount] = React.useState();
       const [inverted, setInverted] = React.useState(false);
 
@@ -20,7 +19,7 @@
 
       return (
         <div>
-          <h1>React Converter</h1>
+          <h3>Time</h3>
           <label htmlFor="minutes">Minutes</label>
           <input
             value={inverted ? amount * 60 : amount}
@@ -43,6 +42,59 @@
           <button onClick={invert}>
             {(inverted ? "Hour" : "Minute") + "Converter"}
           </button>
+        </div>
+      );
+    }
+    function LengthConverter() {
+      const [amount, setAmount] = React.useState();
+      const [inverted, setInverted] = React.useState(false);
+      const onChange = (event) => setAmount(event.target.value);
+
+      const reset = () => setAmount(0);
+      const invert = () => setInverted((current) => !current);
+
+      return (
+        <div>
+          <h3>Length</h3>
+          <label for="km">Kilometer :</label>
+          <input
+            value={
+              inverted
+                ? Number.parseFloat(amount * 1.609344).toFixed(3)
+                : amount
+            }
+            type="number"
+            id="km"
+            placeholder="몇 킬로미터?"
+            onChange={onChange}
+            disabled={inverted === true}
+          />
+          <label for="mile">Mile :</label>
+          <input
+            value={
+              inverted
+                ? amount
+                : Number.parseFloat(amount * 0.62137119).toFixed(3)
+            }
+            type="number"
+            id="mile"
+            placeholder="몇 마일?"
+            onChange={onChange}
+            disabled={inverted === false}
+          />
+          <button onClick={reset}>Reset</button>
+          <button onClick={invert}>
+            {(inverted ? "Mile" : "Kilometer") + "Converter"}
+          </button>
+        </div>
+      );
+    }
+    const root = document.querySelector("#root");
+    function App() {
+      return (
+        <div>
+          <h1>Converter</h1>
+          <LengthConverter />
         </div>
       );
     }
