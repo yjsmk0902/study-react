@@ -10,41 +10,39 @@
     const root = document.querySelector("#root");
     function App() {
       const [amount, setAmount] = React.useState();
-      const [flipped, setFlipped] = React.useState(false);
+      const [inverted, setInverted] = React.useState(false);
 
-      const onChange = (event) => {
-        setAmount(event.target.value);
-      };
+      const onChange = (event) => setAmount(event.target.value);
 
-      const reset = () => {
-        setAmount(0);
-      };
+      const reset = () => setAmount(0);
 
-      const flip = () => setFlipped((current) => !current);
+      const invert = () => setInverted((current) => !current);
 
       return (
         <div>
-          <h1>Converter</h1>
+          <h1>React Converter</h1>
           <label htmlFor="minutes">Minutes</label>
           <input
-            value={flipped ? amount * 60 : amount}
+            value={inverted ? amount * 60 : amount}
             id="minutes"
             placeholder="몇 분?"
             type="number"
             onChange={onChange}
-            disabled={flipped === true}
+            disabled={inverted === true}
           />
           <label htmlFor="hours">Hours</label>
           <input
-            value={flipped ? amount : Math.round(amount / 60)}
+            value={inverted ? amount : Math.round(amount / 60)}
             id="hours"
             placeholder="몇 시간?"
             type="number"
             onChange={onChange}
-            disabled={!flipped === true}
+            disabled={!inverted === true}
           />
           <button onClick={reset}>Reset</button>
-          <button onClick={flip}>Filp</button>
+          <button onClick={invert}>
+            {(inverted ? "Hour" : "Minute") + "Converter"}
+          </button>
         </div>
       );
     }
