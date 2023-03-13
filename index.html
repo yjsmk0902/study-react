@@ -20,7 +20,7 @@
       return (
         <div>
           <h3>Time</h3>
-          <label htmlFor="minutes">Minutes</label>
+          <label htmlFor="minutes">Minutes : </label>
           <input
             value={inverted ? amount * 60 : amount}
             id="minutes"
@@ -29,7 +29,7 @@
             onChange={onChange}
             disabled={inverted === true}
           />
-          <label htmlFor="hours">Hours</label>
+          <label htmlFor="hours">Hours : </label>
           <input
             value={inverted ? amount : Math.round(amount / 60)}
             id="hours"
@@ -56,7 +56,7 @@
       return (
         <div>
           <h3>Length</h3>
-          <label for="km">Kilometer :</label>
+          <label for="km">Kilometer : </label>
           <input
             value={
               inverted
@@ -69,7 +69,7 @@
             onChange={onChange}
             disabled={inverted === true}
           />
-          <label for="mile">Mile :</label>
+          <label for="mile">Mile : </label>
           <input
             value={
               inverted
@@ -91,10 +91,18 @@
     }
     const root = document.querySelector("#root");
     function App() {
+      const [index, setIndex] = React.useState("0");
+      const onSelect = (event) => setIndex(event.target.value);
       return (
         <div>
           <h1>Converter</h1>
-          <LengthConverter />
+          <select value={index} onChange={onSelect}>
+            <option value="0">Time</option>
+            <option value="1">Length</option>
+          </select>
+          <hr />
+          {index === "0" ? <TimeConverter /> : null}
+          {index === "1" ? <LengthConverter /> : null}
         </div>
       );
     }
