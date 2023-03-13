@@ -7,102 +7,27 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function TimeConverter() {
-      const [amount, setAmount] = React.useState();
-      const [inverted, setInverted] = React.useState(false);
-
-      const onChange = (event) => setAmount(event.target.value);
-
-      const reset = () => setAmount(0);
-
-      const invert = () => setInverted((current) => !current);
-
-      return (
-        <div>
-          <h3>Time</h3>
-          <label htmlFor="minutes">Minutes : </label>
-          <input
-            value={inverted ? amount * 60 : amount}
-            id="minutes"
-            placeholder="몇 분?"
-            type="number"
-            onChange={onChange}
-            disabled={inverted === true}
-          />
-          <label htmlFor="hours">Hours : </label>
-          <input
-            value={inverted ? amount : Math.round(amount / 60)}
-            id="hours"
-            placeholder="몇 시간?"
-            type="number"
-            onChange={onChange}
-            disabled={!inverted === true}
-          />
-          <button onClick={reset}>Reset</button>
-          <button onClick={invert}>
-            {(inverted ? "Hour" : "Minute") + "Converter"}
-          </button>
-        </div>
-      );
-    }
-    function LengthConverter() {
-      const [amount, setAmount] = React.useState();
-      const [inverted, setInverted] = React.useState(false);
-      const onChange = (event) => setAmount(event.target.value);
-
-      const reset = () => setAmount(0);
-      const invert = () => setInverted((current) => !current);
-
-      return (
-        <div>
-          <h3>Length</h3>
-          <label for="km">Kilometer : </label>
-          <input
-            value={
-              inverted
-                ? Number.parseFloat(amount * 1.609344).toFixed(3)
-                : amount
-            }
-            type="number"
-            id="km"
-            placeholder="몇 킬로미터?"
-            onChange={onChange}
-            disabled={inverted === true}
-          />
-          <label for="mile">Mile : </label>
-          <input
-            value={
-              inverted
-                ? amount
-                : Number.parseFloat(amount * 0.62137119).toFixed(3)
-            }
-            type="number"
-            id="mile"
-            placeholder="몇 마일?"
-            onChange={onChange}
-            disabled={inverted === false}
-          />
-          <button onClick={reset}>Reset</button>
-          <button onClick={invert}>
-            {(inverted ? "Mile" : "Kilometer") + "Converter"}
-          </button>
-        </div>
-      );
-    }
     const root = document.querySelector("#root");
+    function Btn({ btnName }) {
+      return (
+        <button
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 10,
+          }}
+        >
+          {btnName}
+        </button>
+      );
+    }
     function App() {
-      const [index, setIndex] = React.useState("0");
-      const onSelect = (event) => setIndex(event.target.value);
       return (
         <div>
-          <h1>Converter</h1>
-          <select value={index} onChange={onSelect}>
-            <option value="0">Time</option>
-            <option value="1">Length</option>
-          </select>
-          <hr />
-          {index === "0" ? <TimeConverter /> : null}
-          {index === "1" ? <LengthConverter /> : null}
+          <Btn btnName="Save Changes" />
+          <Btn btnName="Confirm" />
         </div>
       );
     }
