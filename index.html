@@ -9,12 +9,16 @@
   <script type="text/babel">
     const root = document.querySelector("#root");
     function App() {
-      const [minutes, setMinutes] = React.useState();
-      const [hours, setHours] = React.useState();
+      const [amount, setAmount] = React.useState();
       const [flipped, setFlipped] = React.useState(false);
+
       const onChange = (event) => {
+        setAmount(event.target.value);
       };
-      const reset = () => setMinutes(0);
+
+      const reset = () => {
+        setAmount(0);
+      };
 
       const flip = () => setFlipped((current) => !current);
 
@@ -23,7 +27,7 @@
           <h1>Converter</h1>
           <label htmlFor="minutes">Minutes</label>
           <input
-            value={minutes}
+            value={flipped ? amount * 60 : amount}
             id="minutes"
             placeholder="몇 분?"
             type="number"
@@ -32,12 +36,12 @@
           />
           <label htmlFor="hours">Hours</label>
           <input
-            value={Math.round(minutes / 60)}
+            value={flipped ? amount : Math.round(amount / 60)}
             id="hours"
             placeholder="몇 시간?"
             type="number"
             onChange={onChange}
-            disabled={!flipped === false}
+            disabled={!flipped === true}
           />
           <button onClick={reset}>Reset</button>
           <button onClick={flip}>Filp</button>
