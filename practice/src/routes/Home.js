@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import Movie from "./components/Movie";
+import Movie from "../components/Movie";
 
 function Home() {
   const url = `https://yts.mx/api/v2/list_movies.json?minimum_rating=9&sort_by=year`;
